@@ -1,8 +1,10 @@
 package br.com.patrick.domain.model;
 
 
+import br.com.patrick.domain.dtos.token.LoginRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 import java.util.UUID;
@@ -13,10 +15,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private UUID userId;
 
 
-    @NotBlank
+
     private String username;
     private String password;
 
@@ -64,4 +67,9 @@ public class User {
     }
 
 
+    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+
+    return passwordEncoder.matches(loginRequest.password(), this.password);
+
+    }
 }

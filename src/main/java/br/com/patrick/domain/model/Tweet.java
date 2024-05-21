@@ -12,9 +12,10 @@ public class Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "tweet_id")
     private Long tweetId;
 
-    @NotBlank
+
     private String content;
 
     @ManyToOne
@@ -26,6 +27,10 @@ public class Tweet {
 
     public void setTweetId(Long tweetId) {
         this.tweetId = tweetId;
+    }
+
+    public Long getTweetId() {
+        return tweetId;
     }
 
     public User getUser() {
@@ -47,6 +52,7 @@ public class Tweet {
     public Instant getCreationTimestamp() {
         return creationTimestamp;
     }
+
 
     public void setCreationTimestamp(Instant creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
